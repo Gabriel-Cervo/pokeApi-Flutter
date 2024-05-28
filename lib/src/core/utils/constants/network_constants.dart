@@ -1,2 +1,1 @@
-const String baseApiUrl = "";
-const String apiKey = "";
+const String baseApiUrl = "https://pokeapi.co/api/v2/";
