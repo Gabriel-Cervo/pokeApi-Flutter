@@ -10,8 +10,7 @@ class FetchPokemonsUseCase extends UseCase<PokemonList, EmptyParams> {
   FetchPokemonsUseCase(this.repository);
 
   @override
-  Future<Either<Failure, PokemonList>> execute(EmptyParams params) async {
-    final response = await repository.getPokemonList();
-    return response.fold((l) => Left(l), (r) => Right(r));
+  Future<Either<Failure, PokemonList>> execute(EmptyParams params) {
+    return repository.getPokemonList();
   }
 }

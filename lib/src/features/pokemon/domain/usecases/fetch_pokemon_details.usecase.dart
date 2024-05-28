@@ -10,8 +10,7 @@ class FetchPokemonDetails extends UseCase<Pokemon, int> {
   FetchPokemonDetails(this.repository);
 
   @override
-  Future<Either<Failure, Pokemon>> execute(int params) async {
-    final response = await repository.getPokemonDetails(params);
-    return response.fold((l) => Left(l), (r) => Right(r));
+  Future<Either<Failure, Pokemon>> execute(int params) {
+    return repository.getPokemonDetails(params);
   }
 }
