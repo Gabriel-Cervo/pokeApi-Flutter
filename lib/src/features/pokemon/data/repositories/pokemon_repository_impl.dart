@@ -31,5 +31,3 @@ class PokemonRepositoryImpl extends AbstractPokemonRepository {
     }
   }
 }
-
-// HER3X99

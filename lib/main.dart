@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pokeapi/src/core/utils/logs/logger.dart';
 
 void main() {
+  initRootLogger();
   runApp(const MyApp());
 }
 
