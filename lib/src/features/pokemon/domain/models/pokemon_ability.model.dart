@@ -5,12 +5,10 @@ part 'pokemon_ability.model.g.dart';
 
 @JsonSerializable()
 class PokemonAbility {
-  final int id;
-  final String name;
-  final NamedPokemonApiResource generation;
+  final NamedPokemonApiResource ability;
+  final int slot;
 
-  PokemonAbility(
-      {required this.id, required this.name, required this.generation});
+  PokemonAbility({required this.ability, required this.slot});
 
   factory PokemonAbility.fromJson(Map<String, dynamic> json) =>
       _$PokemonAbilityFromJson(json);

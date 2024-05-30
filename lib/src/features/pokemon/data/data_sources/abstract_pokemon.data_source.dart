@@ -3,5 +3,5 @@ import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_list.model.da
 
 abstract class AbstractPokemonDataSource {
   Future<PokemonList> getPokemonList();
-  Future<Pokemon> getPokemonDetails(int id);
+  Future<Pokemon> getPokemonDetails(String url);
 }

@@ -16,7 +16,6 @@ class Pokemon {
   final int weight;
   final bool isDefault;
   final List<NamedPokemonApiResource> forms;
-  final List<NamedPokemonApiResource> species;
   final List<PokemonAbility> abilities;
   final List<PokemonMove> moves;
   final List<PokemonType> types;
@@ -30,7 +29,6 @@ class Pokemon {
       required this.weight,
       required this.isDefault,
       required this.forms,
-      required this.species,
       required this.abilities,
       required this.moves,
       required this.types,

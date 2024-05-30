@@ -26,11 +26,6 @@ class DioNetwork {
       onRequest: (RequestOptions options, r) async {
         Map<String, dynamic> headers = Helper.getDioHeaders();
 
-        if (kDebugMode) {
-          print("Headers");
-          print(json.encode(headers));
-        }
-
         options.headers = headers;
         appAPI.options.headers = headers;
 

@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 
 abstract class AbstractPokemonRepository {
   Future<Either<Failure, PokemonList>> getPokemonList();
-  Future<Either<Failure, Pokemon>> getPokemonDetails(int id);
+  Future<Either<Failure, Pokemon>> getPokemonDetails(String url);
 }
 
 class EmptyParams {}

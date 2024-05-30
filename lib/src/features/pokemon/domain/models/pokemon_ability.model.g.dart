@@ -8,15 +8,13 @@ part of 'pokemon_ability.model.dart';
 
 PokemonAbility _$PokemonAbilityFromJson(Map<String, dynamic> json) =>
     PokemonAbility(
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      generation: NamedPokemonApiResource.fromJson(
-          json['generation'] as Map<String, dynamic>),
+      ability: NamedPokemonApiResource.fromJson(
+          json['ability'] as Map<String, dynamic>),
+      slot: (json['slot'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PokemonAbilityToJson(PokemonAbility instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'generation': instance.generation,
+      'ability': instance.ability,
+      'slot': instance.slot,
     };

@@ -17,10 +17,6 @@ Pokemon _$PokemonFromJson(Map<String, dynamic> json) => Pokemon(
           .map((e) =>
               NamedPokemonApiResource.fromJson(e as Map<String, dynamic>))
           .toList(),
-      species: (json['species'] as List<dynamic>)
-          .map((e) =>
-              NamedPokemonApiResource.fromJson(e as Map<String, dynamic>))
-          .toList(),
       abilities: (json['abilities'] as List<dynamic>)
           .map((e) => PokemonAbility.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -41,7 +37,6 @@ Map<String, dynamic> _$PokemonToJson(Pokemon instance) => <String, dynamic>{
       'weight': instance.weight,
       'is_default': instance.isDefault,
       'forms': instance.forms,
-      'species': instance.species,
       'abilities': instance.abilities,
       'moves': instance.moves,
       'types': instance.types,
