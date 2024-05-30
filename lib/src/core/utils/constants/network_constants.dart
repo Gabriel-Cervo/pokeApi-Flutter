@@ -1,1 +1,3 @@
-const String baseApiUrl = "https://pokeapi.co/api/v2";
+class NetworkConstants {
+  static const String baseApiUrl = "https://pokeapi.co/api/v2";
+}

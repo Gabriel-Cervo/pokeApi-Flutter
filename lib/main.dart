@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokeapi/src/core/network/network_service.dart';
+import 'package:pokeapi/src/core/theme/app_theme_light.dart';
 import 'package:pokeapi/src/core/utils/injector.dart';
 import 'package:pokeapi/src/core/utils/logs/logger.dart';
 import 'package:pokeapi/src/features/pokemon/presentation/views/pokemon_list.view.dart';
@@ -17,9 +18,10 @@ class Pokedex extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Pokedex',
-      home: PokemonListView(),
+      theme: AppThemeLight.theme,
+      home: const PokemonListView(),
     );
   }
 }
