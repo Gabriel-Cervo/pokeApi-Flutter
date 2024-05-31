@@ -7,7 +7,6 @@ import 'package:pokeapi/src/core/utils/state/request.state.dart';
 import 'package:pokeapi/src/core/utils/usecases/usecase.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon.model.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_list.model.dart';
-import 'package:pokeapi/src/features/pokemon/domain/repositories/abstract_pokemon.repository.dart';
 import 'package:pokeapi/src/features/pokemon/domain/usecases/fetch_pokemon_details.usecase.dart';
 import 'package:pokeapi/src/features/pokemon/domain/usecases/fetch_pokemons.usecase.dart';
 
@@ -18,6 +17,8 @@ abstract class PokemonListViewModelBase with Store {
   final UseCase fetchPokemonDetailsUseCase =
       locator<FetchPokemonDetailsUseCase>();
 
+  PokemonList? currentList;
+
   @observable
   List<Pokemon>? pokemons;
 
@@ -27,19 +28,33 @@ abstract class PokemonListViewModelBase with Store {
   @observable
   RequestState fetchState = RequestState.initial;
 
+  @observable
+  int page = 1;
+
+  @observable
+  bool hasReachedEnd = false;
+
   @action
   Future<void> fetchPokemons() async {
     fetchState = RequestState.loading;
 
-    final response = await fetchPokemonsUseCase.execute(EmptyParams());
+    final response = await fetchPokemonsUseCase.execute(page);
     response.fold((l) {
       error = l;
       fetchState = RequestState.error;
     }, (r) async {
       final data = r as PokemonList;
+      currentList = data;
 
       try {
-        pokemons = await _fetchPokemonsDetails(data);
+        final fetchedPokemons = await _fetchPokemonsDetails(data);
+
+        if (pokemons == null) {
+          pokemons = fetchedPokemons;
+        } else {
+          pokemons!.addAll(fetchedPokemons);
+        }
+
         fetchState = RequestState.success;
       } on Failure catch (e) {
         error = e;
@@ -60,6 +75,17 @@ abstract class PokemonListViewModelBase with Store {
 
     logger.info(pokemonsDetails);
     return pokemonsDetails;
+  }
+
+  @action
+  Future<void> fetchNextPage() {
+    if ((currentList != null && currentList!.next == null) || error != null) {
+      hasReachedEnd = true;
+      return Future.value();
+    }
+
+    page += 1;
+    return fetchPokemons();
   }
 }
 

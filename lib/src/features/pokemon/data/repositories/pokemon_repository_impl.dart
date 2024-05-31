@@ -12,9 +12,9 @@ class PokemonRepositoryImpl extends AbstractPokemonRepository {
       locator<AbstractPokemonDataSource>();
 
   @override
-  Future<Either<Failure, PokemonList>> getPokemonList() async {
+  Future<Either<Failure, PokemonList>> getPokemonList(int page) async {
     try {
-      final result = await dataSource.getPokemonList();
+      final result = await dataSource.getPokemonList(page);
       return Right(result);
     } on NetworkException catch (e) {
       return Left(ServerFailure(e.message, e.statusCode));

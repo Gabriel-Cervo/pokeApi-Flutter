@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pokeapi/src/shared/presentation/widget/app_bar.widget.dart';
 
 class BaseScreen extends StatelessWidget {
+  final String? title;
   final Widget child;
-  final String title;
 
   const BaseScreen({
     Key? key,
+    this.title,
     required this.child,
-    required this.title,
   }) : super(key: key);
 
   @override

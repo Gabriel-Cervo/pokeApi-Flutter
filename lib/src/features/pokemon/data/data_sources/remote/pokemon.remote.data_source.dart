@@ -8,12 +8,14 @@ import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_list.model.da
 
 class RemotePokemonDataSource extends AbstractPokemonDataSource {
   final Dio dio = locator<Dio>();
+  final pokemonPerPage = 10;
 
   @override
-  Future<PokemonList> getPokemonList() async {
+  Future<PokemonList> getPokemonList(int page) async {
     try {
-      final response =
-          await dio.get('${NetworkConstants.baseApiUrl}/pokemon?limit=10');
+      final offset = (page - 1) * pokemonPerPage;
+      final response = await dio.get(
+          '${NetworkConstants.baseApiUrl}/pokemon?limit=$pokemonPerPage&offset=$offset');
 
       if (response.data == null) {
         throw NetworkException("Error", response.statusCode);

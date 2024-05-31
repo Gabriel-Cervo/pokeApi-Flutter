@@ -4,7 +4,7 @@ import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_list.model.da
 import 'package:dartz/dartz.dart';
 
 abstract class AbstractPokemonRepository {
-  Future<Either<Failure, PokemonList>> getPokemonList();
+  Future<Either<Failure, PokemonList>> getPokemonList(int page);
   Future<Either<Failure, Pokemon>> getPokemonDetails(String url);
 }
 

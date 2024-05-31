@@ -28,8 +28,17 @@ class TextStyleVariantsLight {
     color: ColorsConstants.black,
   );
 
+  final TextStyle bodyLarge = TextStyle(
+      fontSize: 14, color: ColorsConstants.black, fontWeight: FontWeight.bold);
+
   final TextStyle subtitle = TextStyle(
     fontSize: 12,
     color: ColorsConstants.black,
+  );
+
+  final TextStyle subtitleGray = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+    color: ColorsConstants.gray,
   );
 }

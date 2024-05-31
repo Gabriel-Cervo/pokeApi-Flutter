@@ -14,6 +14,7 @@ class Pokemon {
   final int baseExperience;
   final int height;
   final int weight;
+  final int order;
   final bool isDefault;
   final List<NamedPokemonApiResource> forms;
   final List<PokemonAbility> abilities;
@@ -29,6 +30,7 @@ class Pokemon {
       required this.weight,
       required this.isDefault,
       required this.forms,
+      required this.order,
       required this.abilities,
       required this.moves,
       required this.types,

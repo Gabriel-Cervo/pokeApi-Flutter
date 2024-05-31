@@ -5,12 +5,12 @@ import 'package:pokeapi/src/core/utils/usecases/usecase.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_list.model.dart';
 import 'package:pokeapi/src/features/pokemon/domain/repositories/abstract_pokemon.repository.dart';
 
-class FetchPokemonsUseCase extends UseCase<PokemonList, EmptyParams> {
+class FetchPokemonsUseCase extends UseCase<PokemonList, int> {
   final AbstractPokemonRepository repository =
       locator<AbstractPokemonRepository>();
 
   @override
-  Future<Either<Failure, PokemonList>> execute(EmptyParams params) {
-    return repository.getPokemonList();
+  Future<Either<Failure, PokemonList>> execute(int params) {
+    return repository.getPokemonList(params);
   }
 }

@@ -57,6 +57,38 @@ mixin _$PokemonListViewModel on PokemonListViewModelBase, Store {
     });
   }
 
+  late final _$pageAtom =
+      Atom(name: 'PokemonListViewModelBase.page', context: context);
+
+  @override
+  int get page {
+    _$pageAtom.reportRead();
+    return super.page;
+  }
+
+  @override
+  set page(int value) {
+    _$pageAtom.reportWrite(value, super.page, () {
+      super.page = value;
+    });
+  }
+
+  late final _$hasReachedEndAtom =
+      Atom(name: 'PokemonListViewModelBase.hasReachedEnd', context: context);
+
+  @override
+  bool get hasReachedEnd {
+    _$hasReachedEndAtom.reportRead();
+    return super.hasReachedEnd;
+  }
+
+  @override
+  set hasReachedEnd(bool value) {
+    _$hasReachedEndAtom.reportWrite(value, super.hasReachedEnd, () {
+      super.hasReachedEnd = value;
+    });
+  }
+
   late final _$fetchPokemonsAsyncAction =
       AsyncAction('PokemonListViewModelBase.fetchPokemons', context: context);
 
@@ -65,12 +97,28 @@ mixin _$PokemonListViewModel on PokemonListViewModelBase, Store {
     return _$fetchPokemonsAsyncAction.run(() => super.fetchPokemons());
   }
 
+  late final _$PokemonListViewModelBaseActionController =
+      ActionController(name: 'PokemonListViewModelBase', context: context);
+
+  @override
+  Future<void> fetchNextPage() {
+    final _$actionInfo = _$PokemonListViewModelBaseActionController.startAction(
+        name: 'PokemonListViewModelBase.fetchNextPage');
+    try {
+      return super.fetchNextPage();
+    } finally {
+      _$PokemonListViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 pokemons: ${pokemons},
 error: ${error},
-fetchState: ${fetchState}
+fetchState: ${fetchState},
+page: ${page},
+hasReachedEnd: ${hasReachedEnd}
     ''';
   }
 }
