@@ -50,12 +50,12 @@ class _PokemonListViewState extends State<PokemonListView> {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildPokemonsData(),
+            child: _renderPokemonsData(),
           ),
         ));
   }
 
-  Observer _buildPokemonsData() {
+  Observer _renderPokemonsData() {
     return Observer(
       builder: (_) {
         if (_viewModel.page > 1) {

@@ -5,6 +5,7 @@ import 'package:pokeapi/src/features/pokemon/data/data_sources/abstract_pokemon.
 import 'package:pokeapi/src/features/pokemon/data/data_sources/remote/pokemon.remote.data_source.dart';
 import 'package:pokeapi/src/features/pokemon/data/repositories/pokemon_repository_impl.dart';
 import 'package:pokeapi/src/features/pokemon/domain/repositories/abstract_pokemon.repository.dart';
+import 'package:pokeapi/src/features/pokemon/domain/usecases/fetch_pokemon_color.usecase.dart';
 import 'package:pokeapi/src/features/pokemon/domain/usecases/fetch_pokemon_details.usecase.dart';
 import 'package:pokeapi/src/features/pokemon/domain/usecases/fetch_pokemons.usecase.dart';
 
@@ -29,8 +30,9 @@ class Injector {
   void _injectUseCaseDependencies() {
     locator.registerSingleton<FetchPokemonDetailsUseCase>(
         FetchPokemonDetailsUseCase());
-
     locator.registerSingleton<FetchPokemonsUseCase>(FetchPokemonsUseCase());
+    locator.registerSingleton<FetchPokemonColorUseCase>(
+        FetchPokemonColorUseCase());
   }
 }
 

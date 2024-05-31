@@ -11,9 +11,7 @@ class CachedImageWidget extends StatelessWidget {
     return CachedNetworkImage(
         height: size ?? 48,
         width: size ?? 48,
-        fit: BoxFit.cover,
-        imageUrl: imageUrl,
-        progressIndicatorBuilder: (context, url, downloadProgress) =>
-            CircularProgressIndicator(value: downloadProgress.progress));
+        fit: BoxFit.fill,
+        imageUrl: imageUrl);
   }
 }

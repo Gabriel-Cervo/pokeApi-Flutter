@@ -3,8 +3,9 @@ import 'package:pokeapi/src/core/utils/constants/images_constants.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+  final bool showDivider;
 
-  const AppBarWidget({super.key, this.title});
+  const AppBarWidget({super.key, this.title, this.showDivider = true});
 
   @override
   AppBar build(BuildContext context) {
@@ -12,7 +13,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0.0,
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       title: title == null
-          ? const SizedBox.shrink()
+          ? null
           : Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -30,18 +31,21 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ],
             ),
-      bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(11.0),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Container(
-              color: Theme.of(context).dividerColor,
-              height: 1.0,
-            ),
-          )),
+      bottom: showDivider
+          ? PreferredSize(
+              preferredSize: const Size.fromHeight(11.0),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Container(
+                  color: Theme.of(context).dividerColor,
+                  height: 1.0,
+                ),
+              ))
+          : null,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize =>
+      Size.fromHeight(title == null && !showDivider ? 0 : 70);
 }

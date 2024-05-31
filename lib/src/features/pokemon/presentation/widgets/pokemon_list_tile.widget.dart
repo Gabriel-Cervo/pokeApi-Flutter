@@ -23,7 +23,10 @@ class PokemonListTile extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
             child: Row(
               children: [
-                CachedImageWidget(imageUrl: pokemon.sprites.frontDefault),
+                Hero(
+                    tag: pokemon.sprites.frontDefault,
+                    child: CachedImageWidget(
+                        imageUrl: pokemon.sprites.frontDefault)),
                 const SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
