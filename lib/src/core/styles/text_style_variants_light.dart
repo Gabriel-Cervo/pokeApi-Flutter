@@ -11,23 +11,25 @@ class TextStyleVariantsLight {
 
   TextStyleVariantsLight._init();
 
-  final TextStyle headline1 = TextStyle(
+  final TextStyle titleLarge = TextStyle(
+    fontSize: 34,
+    fontWeight: FontWeight.bold,
+    color: ColorsConstants.black,
+  );
+
+  final TextStyle titleSmall = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: ColorsConstants.black,
+  );
+
+  final TextStyle headline = TextStyle(
     fontSize: 17,
     color: ColorsConstants.black,
   );
 
-  final TextStyle headline2 = TextStyle(
-    fontSize: 18,
-    color: ColorsConstants.black,
-  );
-
-  final TextStyle subtitle1 = TextStyle(
-    fontSize: 11,
-    color: ColorsConstants.black,
-  );
-
-  final TextStyle subtitle2 = TextStyle(
-    fontSize: 15,
+  final TextStyle subtitle = TextStyle(
+    fontSize: 12,
     color: ColorsConstants.black,
   );
 }

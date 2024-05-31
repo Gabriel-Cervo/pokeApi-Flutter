@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pokeapi/src/core/styles/text_style_variants_light.dart';
+import 'package:pokeapi/src/core/utils/constants/colors_constants.dart';
 
 class AppThemeLight {
   static ThemeData theme = ThemeData(
     textTheme: TextTheme(
-      displayLarge: TextStyleVariantsLight.shared?.headline1,
-      displayMedium: TextStyleVariantsLight.shared?.headline2,
+      titleLarge: TextStyleVariantsLight.shared?.titleLarge,
+      titleSmall: TextStyleVariantsLight.shared?.titleSmall,
+      displayLarge: TextStyleVariantsLight.shared?.headline,
+      displayMedium: TextStyleVariantsLight.shared?.subtitle,
     ),
     appBarTheme: ThemeData.light().appBarTheme.copyWith(
-          elevation: 0,
-          centerTitle: true,
-          color: Colors.white,
+          color: ColorsConstants.white,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-    scaffoldBackgroundColor: Colors.white,
+    dividerColor: ColorsConstants.gray,
+    scaffoldBackgroundColor: ColorsConstants.white,
   );
 }

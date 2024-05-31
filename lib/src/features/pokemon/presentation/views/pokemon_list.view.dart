@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pokeapi/src/core/utils/constants/images_constants.dart';
 import 'package:pokeapi/src/core/utils/state/request.state.dart';
 import 'package:pokeapi/src/features/pokemon/presentation/viewmodel/pokemon_list_view_model.dart';
 import 'package:pokeapi/src/shared/presentation/widget/api_error.widget.dart';
+import 'package:pokeapi/src/shared/presentation/widget/base_screen.widget.dart';
 import 'package:pokeapi/src/shared/presentation/widget/loading_indicator.widget.dart';
 
 class PokemonListView extends StatefulWidget {
@@ -23,16 +25,21 @@ class _PokemonListViewState extends State<PokemonListView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return BaseScreen(
+        title: 'Pokedex',
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: ImagesConstants.dexBG,
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: _buildPokemonsData(),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   Observer _buildPokemonsData() {

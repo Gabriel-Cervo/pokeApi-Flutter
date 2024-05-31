@@ -21,15 +21,7 @@ class APIErrorWidget extends StatelessWidget {
   Column _renderContent(BuildContext context) {
     return Column(
       children: [
-        const Image(
-          image: AssetImage('assets/error_illustration.png'),
-          height: 160,
-          width: 210,
-        ),
-        const SizedBox(
-          height: 24,
-        ),
-        Text(title, style: Theme.of(context).textTheme.bodyLarge),
+        Text(title, style: Theme.of(context).textTheme.displayLarge),
         _renderDescriptionIfNeeded(context)
       ],
     );
@@ -47,7 +39,7 @@ class APIErrorWidget extends StatelessWidget {
         ),
         Text(
           subtitle!,
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: Theme.of(context).textTheme.displayMedium,
         ),
       ],
     );
