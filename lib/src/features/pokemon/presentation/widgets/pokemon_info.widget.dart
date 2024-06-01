@@ -80,8 +80,10 @@ class PokemonInfoWidget extends StatelessWidget {
         Wrap(
           runSpacing: 16,
           children: [
-            _renderKeyValueTextRow(context, 'Height', '${pokemon.height}'),
-            _renderKeyValueTextRow(context, 'Weight', '${pokemon.weight}'),
+            _renderKeyValueTextRow(
+                context, 'Height', '${pokemon.height / 10}m'),
+            _renderKeyValueTextRow(
+                context, 'Weight', '${pokemon.weight / 10}kg'),
             _renderKeyValueTextRow(context, 'Abilities',
                 pokemon.abilities.map((a) => a.ability.name).join(', ')),
             _renderGenderInfo(context)
