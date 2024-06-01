@@ -73,11 +73,17 @@ class _PokemonListViewState extends State<PokemonListView> {
       case RequestState.initial:
         return const Center(child: LoadingIndicator());
       case RequestState.error:
-        //TODO: - add button to retry req
-        return const APIErrorWidget(
-          title: "Ops... Ocorreu um erro ao carregar os pokémons!",
-          subtitle: "Por favor, verifique sua conexão e tente novamente.",
-        );
+        if (_viewModel.error != null) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 24.0),
+            child: APIErrorWidget(
+              failure: _viewModel.error!,
+              didTapRetry: () => _viewModel.fetchPokemons(),
+            ),
+          );
+        }
+
+        return const SizedBox.shrink();
       case RequestState.success:
         if (_viewModel.page > 1) {
           return const SizedBox.shrink();

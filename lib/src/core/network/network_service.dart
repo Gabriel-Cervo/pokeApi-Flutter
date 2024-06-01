@@ -12,10 +12,6 @@ class DioNetwork {
     appAPI = Dio(baseOptions(NetworkConstants.baseApiUrl));
     appAPI.interceptors.add(LoggerInterceptor(logger));
     appAPI.interceptors.add(appQueuedInterceptorsWrapper());
-
-    retryAPI = Dio(baseOptions(NetworkConstants.baseApiUrl));
-    retryAPI.interceptors.add(LoggerInterceptor(logger));
-    retryAPI.interceptors.add(interceptorsWrapper());
   }
 
   static QueuedInterceptorsWrapper appQueuedInterceptorsWrapper() {
@@ -38,33 +34,6 @@ class DioNetwork {
       onResponse: (Response<dynamic> response,
           ResponseInterceptorHandler handler) async {
         return handler.next(response);
-      },
-    );
-  }
-
-  static InterceptorsWrapper interceptorsWrapper() {
-    return InterceptorsWrapper(
-      onRequest: (RequestOptions options, r) async {
-        Map<String, dynamic> headers = Helper.getDioHeaders();
-
-        options.headers = headers;
-        appAPI.options.headers = headers;
-
-        return r.next(options);
-      },
-      onResponse: (response, handler) async {
-        if ("${(response.data["code"] ?? "0")}" != "0") {
-          return handler.resolve(response);
-        }
-
-        return handler.next(response);
-      },
-      onError: (error, handler) {
-        try {
-          return handler.next(error);
-        } catch (_) {
-          return handler.reject(error);
-        }
       },
     );
   }

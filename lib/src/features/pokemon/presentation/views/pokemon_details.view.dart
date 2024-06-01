@@ -66,12 +66,16 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView>
 
         return const Center(child: LoadingIndicator());
       case RequestState.error:
-        return const BaseScreen(
-          child: APIErrorWidget(
-            title: "Ops... Ocorreu um erro ao carregar os dados desse pokémon!",
-            subtitle: "Por favor, verifique sua conexão e tente novamente.",
-          ),
-        );
+        if (_viewModel.error != null) {
+          return BaseScreen(
+            child: APIErrorWidget(
+              failure: _viewModel.error!,
+              didTapRetry: () => _retryLastRequest(),
+            ),
+          );
+        }
+
+        return const SizedBox.shrink();
       case RequestState.success:
         return _renderData();
     }
@@ -292,5 +296,19 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView>
       _isFetchingPrevPokemon = false;
       _dragOffset = 0;
     });
+  }
+
+  void _retryLastRequest() {
+    if (_isFetchingNextPokemon) {
+      _viewModel.fetchNextPokemon();
+      return;
+    }
+
+    if (_isFetchingPrevPokemon) {
+      _viewModel.fetchPrevPokemon();
+      return;
+    }
+
+    _viewModel.fetchPokemonSpecie(activePokemon.id);
   }
 }

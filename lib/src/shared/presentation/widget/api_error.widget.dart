@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pokeapi/src/core/network/errors/network_failure.dart';
 
 class APIErrorWidget extends StatelessWidget {
-  final String title;
-  final String? subtitle;
+  final Failure failure;
+  final Function()? didTapRetry;
 
-  const APIErrorWidget({Key? key, required this.title, this.subtitle})
+  const APIErrorWidget({Key? key, required this.failure, this.didTapRetry})
       : super(key: key);
 
   @override
@@ -21,15 +22,30 @@ class APIErrorWidget extends StatelessWidget {
   Column _renderContent(BuildContext context) {
     return Column(
       children: [
-        Text(title, style: Theme.of(context).textTheme.displayLarge),
-        _renderDescriptionIfNeeded(context)
+        Text('Ops... algo deu errado',
+            style: Theme.of(context).textTheme.displayLarge),
+        _renderDescription(context),
+        const SizedBox(
+          height: 16,
+        ),
+        ElevatedButton(
+            style: Theme.of(context).elevatedButtonTheme.style,
+            onPressed: didTapRetry != null ? () => didTapRetry!() : null,
+            child: const Text('Tentar novamente'))
       ],
     );
   }
 
-  Widget _renderDescriptionIfNeeded(BuildContext context) {
-    if (subtitle == null) {
-      return const SizedBox();
+  Widget _renderDescription(BuildContext context) {
+    String subtitle = 'Por favor, verifique sua conexão e tente novamente';
+
+    if (failure is ServerFailure) {
+      final serverFailure = failure as ServerFailure;
+
+      if (serverFailure.statusCode != null) {
+        subtitle =
+            "${serverFailure.errorMessage}\nCódigo de erro: ${serverFailure.statusCode}";
+      }
     }
 
     return Column(
@@ -38,7 +54,7 @@ class APIErrorWidget extends StatelessWidget {
           height: 12,
         ),
         Text(
-          subtitle!,
+          subtitle,
           style: Theme.of(context).textTheme.displayMedium,
         ),
       ],

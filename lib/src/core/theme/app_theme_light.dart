@@ -20,5 +20,9 @@ class AppThemeLight {
           ),
       dividerColor: ColorsConstants.gray,
       scaffoldBackgroundColor: ColorsConstants.backgroundGray,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+              foregroundColor: MaterialStatePropertyAll(ColorsConstants.white),
+              backgroundColor: MaterialStatePropertyAll(ColorsConstants.red))),
       listTileTheme: ListTileThemeData(tileColor: ColorsConstants.white));
 }
