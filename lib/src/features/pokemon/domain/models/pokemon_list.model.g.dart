@@ -8,6 +8,7 @@ part of 'pokemon_list.model.dart';
 
 PokemonList _$PokemonListFromJson(Map<String, dynamic> json) => PokemonList(
       next: json['next'] as String?,
+      count: (json['count'] as num?)?.toInt(),
       previous: json['previous'] as String?,
       results: (json['results'] as List<dynamic>)
           .map((e) =>
@@ -17,6 +18,7 @@ PokemonList _$PokemonListFromJson(Map<String, dynamic> json) => PokemonList(
 
 Map<String, dynamic> _$PokemonListToJson(PokemonList instance) =>
     <String, dynamic>{
+      'count': instance.count,
       'next': instance.next,
       'previous': instance.previous,
       'results': instance.results,

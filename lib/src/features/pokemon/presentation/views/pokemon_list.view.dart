@@ -123,7 +123,13 @@ class _PokemonListViewState extends State<PokemonListView> {
   }
 
   void _didTapPokemon(Pokemon pokemon, BuildContext context) {
+    const numberOfPokemonsIn2024 = 1164;
+
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (_) => PokemonDetailsView(pokemon: pokemon)));
+        builder: (_) => PokemonDetailsView(
+              initialPokemon: pokemon,
+              totalPokemonInApi:
+                  _viewModel.currentList?.count ?? numberOfPokemonsIn2024,
+            )));
   }
 }

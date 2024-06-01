@@ -5,11 +5,12 @@ part 'pokemon_list.model.g.dart';
 
 @JsonSerializable()
 class PokemonList {
+  final int? count;
   final String? next;
   final String? previous;
   final List<NamedPokemonApiResource> results;
 
-  PokemonList({this.next, this.previous, required this.results});
+  PokemonList({this.next, this.count, this.previous, required this.results});
 
   factory PokemonList.fromJson(Map<String, dynamic> json) =>
       _$PokemonListFromJson(json);
