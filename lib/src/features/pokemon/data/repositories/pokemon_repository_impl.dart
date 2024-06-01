@@ -4,8 +4,8 @@ import 'package:pokeapi/src/core/network/errors/network_failure.dart';
 import 'package:pokeapi/src/core/utils/injector.dart';
 import 'package:pokeapi/src/features/pokemon/data/data_sources/abstract_pokemon.data_source.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon.model.dart';
-import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_color.model.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_list.model.dart';
+import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_specie.model.dart';
 import 'package:pokeapi/src/features/pokemon/domain/repositories/abstract_pokemon.repository.dart';
 
 class PokemonRepositoryImpl extends AbstractPokemonRepository {
@@ -23,9 +23,9 @@ class PokemonRepositoryImpl extends AbstractPokemonRepository {
   }
 
   @override
-  Future<Either<Failure, PokemonColor>> getPokemonColor(int id) async {
+  Future<Either<Failure, PokemonSpecie>> getPokemonSpecie(int id) async {
     try {
-      final result = await dataSource.getPokemonColor(id);
+      final result = await dataSource.getPokemonSpecie(id);
       return Right(result);
     } on NetworkException catch (e) {
       return Left(ServerFailure(e.message, e.statusCode));

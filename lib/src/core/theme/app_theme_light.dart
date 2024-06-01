@@ -7,11 +7,12 @@ class AppThemeLight {
   static ThemeData theme = ThemeData(
       textTheme: TextTheme(
         titleLarge: TextStyleVariantsLight.shared?.titleLarge,
+        titleMedium: TextStyleVariantsLight.shared?.titleMedium,
         titleSmall: TextStyleVariantsLight.shared?.titleSmall,
         displayLarge: TextStyleVariantsLight.shared?.headline,
-        bodyMedium: TextStyleVariantsLight.shared?.subtitle,
-        bodyLarge: TextStyleVariantsLight.shared?.bodyLarge,
         displayMedium: TextStyleVariantsLight.shared?.subtitleGray,
+        bodyLarge: TextStyleVariantsLight.shared?.bodyLarge,
+        bodyMedium: TextStyleVariantsLight.shared?.subtitle,
       ),
       appBarTheme: ThemeData.light().appBarTheme.copyWith(
             color: ColorsConstants.white,

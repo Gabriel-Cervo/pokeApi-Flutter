@@ -5,13 +5,14 @@ import 'package:pokeapi/src/core/utils/injector.dart';
 import 'package:pokeapi/src/core/utils/state/request.state.dart';
 import 'package:pokeapi/src/core/utils/usecases/usecase.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon.model.dart';
-import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_color.model.dart';
-import 'package:pokeapi/src/features/pokemon/domain/usecases/fetch_pokemon_color.usecase.dart';
+import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_specie.model.dart';
 import 'package:pokeapi/src/features/pokemon/domain/usecases/fetch_pokemon_details.usecase.dart';
+import 'package:pokeapi/src/features/pokemon/domain/usecases/fetch_pokemon_specie.usecase.dart';
 part 'pokemon_details_view_model.g.dart';
 
 abstract class PokemonDetailsViewModelBase with Store {
-  final UseCase fetchPokemonColorUseCase = locator<FetchPokemonColorUseCase>();
+  final UseCase fetchPokemonSpecieUseCase =
+      locator<FetchPokemonSpecieUseCase>();
   final UseCase fetchPokemonDetailsUseCase =
       locator<FetchPokemonDetailsUseCase>();
 
@@ -19,7 +20,7 @@ abstract class PokemonDetailsViewModelBase with Store {
   Pokemon? pokemonDetails;
 
   @observable
-  PokemonColor? pokemonColor;
+  PokemonSpecie? pokemonSpecie;
 
   @observable
   Failure? error;
@@ -28,16 +29,16 @@ abstract class PokemonDetailsViewModelBase with Store {
   RequestState fetchState = RequestState.initial;
 
   @action
-  Future<void> fetchPokemonColor(int id) async {
+  Future<void> fetchPokemonSpecie(int id) async {
     fetchState = RequestState.loading;
 
-    final response = await fetchPokemonColorUseCase.execute(id);
+    final response = await fetchPokemonSpecieUseCase.execute(id);
     response.fold((l) {
       error = l;
       fetchState = RequestState.error;
     }, (r) async {
-      final data = r as PokemonColor;
-      pokemonColor = data;
+      final data = r as PokemonSpecie;
+      pokemonSpecie = data;
       fetchState = RequestState.success;
     });
   }
@@ -55,7 +56,7 @@ abstract class PokemonDetailsViewModelBase with Store {
       final data = r as Pokemon;
       pokemonDetails = data;
       fetchState = RequestState.success;
-      return fetchPokemonColor(data.id);
+      return fetchPokemonSpecie(data.id);
     });
   }
 

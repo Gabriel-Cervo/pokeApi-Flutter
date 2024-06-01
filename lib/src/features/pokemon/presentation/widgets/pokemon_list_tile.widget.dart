@@ -32,7 +32,7 @@ class PokemonListTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '#${pokemon.order}',
+                      '#${pokemon.id}',
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
                     Text(

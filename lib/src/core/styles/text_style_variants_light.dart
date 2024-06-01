@@ -17,6 +17,12 @@ class TextStyleVariantsLight {
     color: ColorsConstants.black,
   );
 
+  final TextStyle titleMedium = TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.bold,
+    color: ColorsConstants.black,
+  );
+
   final TextStyle titleSmall = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
@@ -28,7 +34,7 @@ class TextStyleVariantsLight {
     color: ColorsConstants.black,
   );
 
-final TextStyle bodyLarge = TextStyle(
+  final TextStyle bodyLarge = TextStyle(
       fontSize: 14, color: ColorsConstants.black, fontWeight: FontWeight.bold);
 
   final TextStyle subtitle = TextStyle(

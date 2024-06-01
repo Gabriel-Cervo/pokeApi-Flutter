@@ -6,7 +6,9 @@ import 'package:pokeapi/src/core/utils/constants/images_constants.dart';
 import 'package:pokeapi/src/core/utils/state/request.state.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon.model.dart';
 import 'package:pokeapi/src/features/pokemon/presentation/viewmodel/pokemon_details_view_model.dart';
+import 'package:pokeapi/src/features/pokemon/presentation/widgets/pokemon_info.widget.dart';
 import 'package:pokeapi/src/shared/presentation/widget/api_error.widget.dart';
+import 'package:pokeapi/src/shared/presentation/widget/base_screen.widget.dart';
 import 'package:pokeapi/src/shared/presentation/widget/cached_image.widget.dart';
 import 'package:pokeapi/src/shared/presentation/widget/loading_indicator.widget.dart';
 
@@ -41,7 +43,7 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView>
   void initState() {
     super.initState();
     _viewModel.pokemonDetails = widget.initialPokemon;
-    _viewModel.fetchPokemonColor(widget.initialPokemon.id);
+    _viewModel.fetchPokemonSpecie(widget.initialPokemon.id);
   }
 
   @override
@@ -64,9 +66,11 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView>
 
         return const Center(child: LoadingIndicator());
       case RequestState.error:
-        return const APIErrorWidget(
-          title: "Ops... Ocorreu um erro ao carregar os pokémons!",
-          subtitle: "Por favor, verifique sua conexão e tente novamente.",
+        return const BaseScreen(
+          child: APIErrorWidget(
+            title: "Ops... Ocorreu um erro ao carregar os dados desse pokémon!",
+            subtitle: "Por favor, verifique sua conexão e tente novamente.",
+          ),
         );
       case RequestState.success:
         return _renderData();
@@ -74,26 +78,33 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView>
   }
 
   Widget _renderData() {
-    if (_viewModel.pokemonColor == null) {
+    if (_viewModel.pokemonSpecie == null) {
       return const SizedBox.shrink();
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _renderHeader(),
-        Transform(
-            transform: Matrix4.translationValues(0, -16, 0),
-            child: Container(
-              height: 100,
-              decoration: BoxDecoration(
-                  color: ColorsConstants.white,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      topRight: Radius.circular(16))),
-            ))
-      ],
+      children: [_renderHeader(), Expanded(child: _renderContent())],
     );
+  }
+
+  Widget _renderContent() {
+    return Transform(
+        transform: Matrix4.translationValues(0, -16, 0),
+        child: Container(
+          height: 100,
+          decoration: BoxDecoration(
+              color: ColorsConstants.white,
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: PokemonInfoWidget(
+              pokemon: activePokemon,
+              specie: _viewModel.pokemonSpecie!,
+            ),
+          ),
+        ));
   }
 
   Widget _renderHeader() {
@@ -102,11 +113,11 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView>
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: ColorsConstants.stringToColorMap[
-                        _viewModel.pokemonColor!.color.name] ==
+                        _viewModel.pokemonSpecie!.color.name] ==
                     Colors.white
                 ? Colors.grey
                 : ColorsConstants
-                    .stringToColorMap[_viewModel.pokemonColor!.color.name],
+                    .stringToColorMap[_viewModel.pokemonSpecie!.color.name],
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16), topRight: Radius.circular(16))),
         child: Stack(children: [

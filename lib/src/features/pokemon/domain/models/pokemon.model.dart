@@ -3,6 +3,7 @@ import 'package:pokeapi/src/features/pokemon/domain/models/named_pokemon_api_res
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_ability.model.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_move.model.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_sprites.model.dart';
+import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_stat.model.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_type.model.dart';
 
 part 'pokemon.model.g.dart';
@@ -20,6 +21,7 @@ class Pokemon {
   final List<PokemonAbility> abilities;
   final List<PokemonMove> moves;
   final List<PokemonType> types;
+  final List<PokemonStat> stats;
   final PokemonSprites sprites;
 
   Pokemon(
@@ -34,7 +36,8 @@ class Pokemon {
       required this.abilities,
       required this.moves,
       required this.types,
-      required this.sprites});
+      required this.sprites,
+      required this.stats});
 
   factory Pokemon.fromJson(Map<String, dynamic> json) =>
       _$PokemonFromJson(json);

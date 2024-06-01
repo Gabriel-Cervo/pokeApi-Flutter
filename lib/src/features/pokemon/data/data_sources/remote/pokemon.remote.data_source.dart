@@ -4,8 +4,8 @@ import 'package:pokeapi/src/core/utils/constants/network_constants.dart';
 import 'package:pokeapi/src/core/utils/injector.dart';
 import 'package:pokeapi/src/features/pokemon/data/data_sources/abstract_pokemon.data_source.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon.model.dart';
-import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_color.model.dart';
 import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_list.model.dart';
+import 'package:pokeapi/src/features/pokemon/domain/models/pokemon_specie.model.dart';
 
 class RemotePokemonDataSource extends AbstractPokemonDataSource {
   final Dio dio = locator<Dio>();
@@ -54,7 +54,7 @@ class RemotePokemonDataSource extends AbstractPokemonDataSource {
   }
 
   @override
-  Future<PokemonColor> getPokemonColor(int id) async {
+  Future<PokemonSpecie> getPokemonSpecie(int id) async {
     try {
       final response =
           await dio.get('${NetworkConstants.baseApiUrl}/pokemon-species/$id');
@@ -63,7 +63,7 @@ class RemotePokemonDataSource extends AbstractPokemonDataSource {
         throw NetworkException("Error", response.statusCode);
       }
 
-      final PokemonColor data = PokemonColor.fromJson(response.data!);
+      final PokemonSpecie data = PokemonSpecie.fromJson(response.data!);
       return data;
     } on DioException catch (e) {
       throw NetworkException(e.toString(), e.response?.statusCode);

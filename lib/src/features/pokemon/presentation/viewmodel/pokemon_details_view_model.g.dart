@@ -25,19 +25,19 @@ mixin _$PokemonDetailsViewModel on PokemonDetailsViewModelBase, Store {
     });
   }
 
-  late final _$pokemonColorAtom =
-      Atom(name: 'PokemonDetailsViewModelBase.pokemonColor', context: context);
+  late final _$pokemonSpecieAtom =
+      Atom(name: 'PokemonDetailsViewModelBase.pokemonSpecie', context: context);
 
   @override
-  PokemonColor? get pokemonColor {
-    _$pokemonColorAtom.reportRead();
-    return super.pokemonColor;
+  PokemonSpecie? get pokemonSpecie {
+    _$pokemonSpecieAtom.reportRead();
+    return super.pokemonSpecie;
   }
 
   @override
-  set pokemonColor(PokemonColor? value) {
-    _$pokemonColorAtom.reportWrite(value, super.pokemonColor, () {
-      super.pokemonColor = value;
+  set pokemonSpecie(PokemonSpecie? value) {
+    _$pokemonSpecieAtom.reportWrite(value, super.pokemonSpecie, () {
+      super.pokemonSpecie = value;
     });
   }
 
@@ -73,14 +73,14 @@ mixin _$PokemonDetailsViewModel on PokemonDetailsViewModelBase, Store {
     });
   }
 
-  late final _$fetchPokemonColorAsyncAction = AsyncAction(
-      'PokemonDetailsViewModelBase.fetchPokemonColor',
+  late final _$fetchPokemonSpecieAsyncAction = AsyncAction(
+      'PokemonDetailsViewModelBase.fetchPokemonSpecie',
       context: context);
 
   @override
-  Future<void> fetchPokemonColor(int id) {
-    return _$fetchPokemonColorAsyncAction
-        .run(() => super.fetchPokemonColor(id));
+  Future<void> fetchPokemonSpecie(int id) {
+    return _$fetchPokemonSpecieAsyncAction
+        .run(() => super.fetchPokemonSpecie(id));
   }
 
   late final _$fetchPokemonDetailsAsyncAction = AsyncAction(
@@ -115,7 +115,7 @@ mixin _$PokemonDetailsViewModel on PokemonDetailsViewModelBase, Store {
   String toString() {
     return '''
 pokemonDetails: ${pokemonDetails},
-pokemonColor: ${pokemonColor},
+pokemonSpecie: ${pokemonSpecie},
 error: ${error},
 fetchState: ${fetchState}
     ''';
