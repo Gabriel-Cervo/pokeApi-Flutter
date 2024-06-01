@@ -84,6 +84,7 @@ class PokemonInfoWidget extends StatelessWidget {
             _renderKeyValueTextRow(context, 'Weight', '${pokemon.weight}'),
             _renderKeyValueTextRow(context, 'Abilities',
                 pokemon.abilities.map((a) => a.ability.name).join(', ')),
+            _renderGenderInfo(context)
           ],
         ),
       ],
@@ -148,6 +149,59 @@ class PokemonInfoWidget extends StatelessWidget {
         text,
         style: Theme.of(context).textTheme.titleSmall,
       ),
+    );
+  }
+
+  Widget _renderGenderInfo(BuildContext context) {
+    final femalePercentage = (specie.genderRate / 8) * 100;
+    final malePercentage = 100 - femalePercentage;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          fit: FlexFit.loose,
+          child: Text(
+            "Gender",
+            style: Theme.of(context).textTheme.displayMedium,
+          ),
+        ),
+        const SizedBox(
+          width: 16,
+        ),
+        Row(
+          children: [
+            Row(
+              children: [
+                const Icon(
+                  Icons.male,
+                  color: Colors.blue,
+                  size: 18,
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                Text('$malePercentage%')
+              ],
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+            Row(
+              children: [
+                const Icon(
+                  Icons.female,
+                  color: Colors.pink,
+                  size: 18,
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                Text('$femalePercentage%')
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
